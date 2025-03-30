@@ -23,7 +23,7 @@ const LinkCard = ({ url, fetchUrls }) => {
 
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url?.id);
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+ 
 
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center mb-4 p-4 bg-gray-900 rounded-lg shadow-lg gap-4 md:gap-6">
@@ -38,7 +38,7 @@ const LinkCard = ({ url, fetchUrls }) => {
           {url?.title}
         </span>
         <span className="text-sm md:text-lg text-blue-500 mb-2 hover:underline cursor-pointer block">
-        {`${baseUrl}${url?.custom_url || url?.short_url}`}
+        {`{typeof window !== "undefined" ? window.location.origin : ""}${url?.custom_url || url?.short_url}`}
         </span>
         <span className="text-xs md:text-sm text-gray-400 break-all mb-2 block">
           {url?.original_url}
@@ -51,7 +51,7 @@ const LinkCard = ({ url, fetchUrls }) => {
       <div className="flex gap-2 items-center mt-4 md:mt-0">
         <Button
           onClick={() => {
-            navigator.clipboard.writeText(`${baseUrl}${url?.short_url}`);
+            navigator.clipboard.writeText(`${typeof window !== "undefined" ? window.location.origin : ""}${url?.short_url}`);
           }}
         >
           <Copy />

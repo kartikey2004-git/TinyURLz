@@ -62,7 +62,7 @@ const Link = () => {
     link = url?.custom_url ? url?.custom_url : url.short_url;
   }
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  
 
   return (
     <div className="p-4 lg:p-8">
@@ -78,11 +78,11 @@ const Link = () => {
           </h1>
 
           <a
-            href={`${baseUrl}${link}`}
+            href={`${typeof window !== "undefined" ? window.location.origin : ""}${link}`}
             target="_blank"
             className="text-lg sm:text-2xl md:text-xl text-blue-500 font-bold hover:underline break-all"
           >
-            {`${baseUrl}${link}`}
+            {`{typeof window !== "undefined" ? window.location.origin : ""}${link}`}
           </a>
 
           <a
@@ -102,7 +102,7 @@ const Link = () => {
           <div className="flex gap-2 mt-6">
             <Button
               onClick={() => {
-                navigator.clipboard.writeText(`${baseUrl}${url?.short_url}`);
+                navigator.clipboard.writeText(`${typeof window !== "undefined" ? window.location.origin : ""}${url?.short_url}`);
               }}
             >
               <Copy />
