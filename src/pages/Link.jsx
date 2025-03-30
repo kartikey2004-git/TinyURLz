@@ -99,6 +99,9 @@ const Link = () => {
             {new Date(url?.created_at).toLocaleString()}
           </span>
 
+           <div className="flex gap-2 mt-6">
+
+           
             <Button onClick={downloadImage}>
               <Download />
             </Button>
@@ -118,6 +121,7 @@ const Link = () => {
                 <Trash />
               )}
             </Button>
+          </div>
           </div>
 
           <img
