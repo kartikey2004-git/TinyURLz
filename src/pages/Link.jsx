@@ -57,12 +57,12 @@ const Link = () => {
     navigate("/dashboard");
   }
 
+  const locationOrigin = typeof window !== "undefined" ? window.location.origin : "";
+
   let link = "";
   if (url) {
-    link = url?.custom_url ? url?.custom_url : url.short_url;
+    link = url?.custom_url ? url?.custom_url : url?.short_url;
   }
-
-  
 
   return (
     <div className="p-4 lg:p-8">
@@ -78,11 +78,11 @@ const Link = () => {
           </h1>
 
           <a
-            href={`${typeof window !== "undefined" ? window.location.origin : ""}${link}`}
+            href={`${locationOrigin}${link}`}
             target="_blank"
             className="text-lg sm:text-2xl md:text-xl text-blue-500 font-bold hover:underline break-all"
           >
-            {`{typeof window !== "undefined" ? window.location.origin : ""}${link}`}
+            {`${locationOrigin}${link}`}
           </a>
 
           <a
@@ -102,7 +102,7 @@ const Link = () => {
           <div className="flex gap-2 mt-6">
             <Button
               onClick={() => {
-                navigator.clipboard.writeText(`${typeof window !== "undefined" ? window.location.origin : ""}${url?.short_url}`);
+                navigator.clipboard.writeText(`${locationOrigin}${url?.short_url}`);
               }}
             >
               <Copy />
