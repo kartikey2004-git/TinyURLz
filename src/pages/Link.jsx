@@ -15,7 +15,7 @@ import Device from "@/components/Device-stats";
 
 const Link = () => {
   const locationOrigin =
-    typeof window !== "undefined" ? window.location.hostname : "";
+    typeof window !== "undefined" ? window.location.origin : "";
 
   const downloadImage = () => {
     const imageUrl = url?.qr;
@@ -79,11 +79,11 @@ const Link = () => {
           </h1>
 
           <a
-            href={`${locationOrigin}${link}`}
+            href={`${locationOrigin}/${url?.custom_url}`}
             target="_blank"
             className="text-lg sm:text-2xl md:text-xl text-blue-500 font-bold hover:underline break-all"
           >
-            {`${locationOrigin}${link}`}
+            {`${locationOrigin}/${link}`}
           </a>
 
           <a

@@ -8,7 +8,7 @@ import { BeatLoader } from "react-spinners";
 
 
 const LinkCard = ({ url, fetchUrls }) => {
-  const locationOrigin = typeof window !== "undefined" ? window.location.hostname : "";
+  const locationOrigin = typeof window !== "undefined" ? window.location.origin : "";
 
   const downloadImage = () => {
     const imageUrl = url?.qr;
@@ -38,7 +38,7 @@ const LinkCard = ({ url, fetchUrls }) => {
           {url?.title}
         </span>
         <span className="text-sm md:text-lg text-blue-500 mb-2 hover:underline cursor-pointer block">
-          {`${locationOrigin}${url?.custom_url || url?.short_url}`}
+          {`${locationOrigin}/${url?.custom_url || url?.short_url}`}
         </span>
         <span className="text-xs md:text-sm text-gray-400 break-all mb-2 block">
           {url?.original_url}
