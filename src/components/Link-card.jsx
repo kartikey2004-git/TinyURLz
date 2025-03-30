@@ -6,7 +6,10 @@ import useFetch from "@/hooks/Use-fetch";
 import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 
+
 const LinkCard = ({ url, fetchUrls }) => {
+  const locationOrigin = typeof window !== "undefined" ? window.location.hostname : "";
+
   const downloadImage = () => {
     const imageUrl = url?.qr;
     const fileName = url?.title;
@@ -21,9 +24,6 @@ const LinkCard = ({ url, fetchUrls }) => {
   };
 
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url?.id);
-
-  // Compute the location origin once
-  const locationOrigin = typeof window !== "undefined" ? window.location.origin : "";
 
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center mb-4 p-4 bg-gray-900 rounded-lg shadow-lg gap-4 md:gap-6">

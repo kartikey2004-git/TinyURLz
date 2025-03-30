@@ -12,7 +12,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LocationStats from "@/components/Location-stats";
 import Device from "@/components/Device-stats";
 
+
 const Link = () => {
+  const locationOrigin =
+    typeof window !== "undefined" ? window.location.hostname : "";
+
   const downloadImage = () => {
     const imageUrl = url?.qr;
     const fileName = url?.title;
@@ -57,11 +61,9 @@ const Link = () => {
     navigate("/dashboard");
   }
 
-  const locationOrigin = typeof window !== "undefined" ? window.location.origin : "";
-
   let link = "";
   if (url) {
-    link = url?.custom_url ? url?.custom_url : url?.short_url;
+    link = url?.custom_url ? url?.custom_url : url.short_url;
   }
 
   return (
@@ -71,7 +73,6 @@ const Link = () => {
       )}
 
       <div className="flex flex-col lg:flex-row gap-8 justify-between">
-        {/* Left Section */}
         <div className="flex flex-col items-start gap-6 lg:w-2/5">
           <h1 className="text-3xl sm:text-5xl font-extrabold hover:underline cursor-pointer break-words">
             {url?.title}
@@ -98,11 +99,12 @@ const Link = () => {
             {new Date(url?.created_at).toLocaleString()}
           </span>
 
-          {/* Buttons */}
           <div className="flex gap-2 mt-6">
             <Button
               onClick={() => {
-                navigator.clipboard.writeText(`${locationOrigin}${url?.short_url}`);
+                navigator.clipboard.writeText(
+                  `${locationOrigin}${url?.short_url}`
+                );
               }}
             >
               <Copy />
@@ -136,7 +138,6 @@ const Link = () => {
           />
         </div>
 
-        {/* Right Section (Stats) */}
         <Card className="lg:w-3/5 ">
           <CardHeader>
             <CardTitle className="text-3xl sm:text-4xl font-extrabold">

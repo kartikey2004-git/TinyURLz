@@ -23,6 +23,10 @@ import { BeatLoader } from "react-spinners";
 
 
 const CreateLink = () => {
+
+  const locationOrigin = typeof window !== "undefined" ? window.location.hostname : "";
+
+  
   const { user } = UrlState();
   const navigate = useNavigate();
 
@@ -155,7 +159,7 @@ const CreateLink = () => {
 
 
         <div className="flex items-center gap-2 mb-3">
-          <Card className="p-2">url.elixircommunity.in</Card>/
+          <Card className="p-2">{locationOrigin}</Card>/
           <Input
             id="customUrl"
             value={formValues.customUrl}
