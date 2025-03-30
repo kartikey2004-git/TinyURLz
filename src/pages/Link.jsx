@@ -4,7 +4,7 @@ import { UrlState } from "../Context.jsx";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/Use-fetch";
-import { Copy, Download, LinkIcon, Trash } from "lucide-react";
+import {  Download, LinkIcon, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader, BeatLoader } from "react-spinners";
@@ -99,17 +99,6 @@ const Link = () => {
             {new Date(url?.created_at).toLocaleString()}
           </span>
 
-          <div className="flex gap-2 mt-6">
-            <Button
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `${locationOrigin}${url?.short_url}`
-                );
-              }}
-            >
-              <Copy />
-            </Button>
-
             <Button onClick={downloadImage}>
               <Download />
             </Button>
@@ -171,7 +160,6 @@ const Link = () => {
           )}
         </Card>
       </div>
-    </div>
   );
 };
 
