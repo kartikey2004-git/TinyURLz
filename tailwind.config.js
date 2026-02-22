@@ -3,6 +3,13 @@ module.exports = {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       fontFamily: {
         sans: [
@@ -15,115 +22,54 @@ module.exports = {
           "sans-serif",
         ],
       },
-      fontSize: {
-        xs: [
-          "var(--font-size-xs)",
-          { lineHeight: "var(--line-height-normal)" },
-        ],
-        sm: [
-          "var(--font-size-sm)",
-          { lineHeight: "var(--line-height-normal)" },
-        ],
-        base: [
-          "var(--font-size-base)",
-          { lineHeight: "var(--line-height-normal)" },
-        ],
-        lg: [
-          "var(--font-size-lg)",
-          { lineHeight: "var(--line-height-normal)" },
-        ],
-        xl: ["var(--font-size-xl)", { lineHeight: "var(--line-height-tight)" }],
-        "2xl": [
-          "var(--font-size-2xl)",
-          { lineHeight: "var(--line-height-tight)" },
-        ],
-        "3xl": [
-          "var(--font-size-3xl)",
-          { lineHeight: "var(--line-height-tight)" },
-        ],
-        "4xl": [
-          "var(--font-size-4xl)",
-          { lineHeight: "var(--line-height-tight)" },
-        ],
-        "5xl": [
-          "var(--font-size-5xl)",
-          { lineHeight: "var(--line-height-tight)" },
-        ],
-      },
       colors: {
-        border: "var(--border-primary)",
-        input: "var(--border-primary)",
-        ring: "var(--text-primary)",
-        background: "var(--bg-primary)",
-        foreground: "var(--text-primary)",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "var(--text-primary)",
-          foreground: "var(--bg-primary)",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "var(--bg-muted)",
-          foreground: "var(--text-secondary)",
-        },
-        muted: {
-          DEFAULT: "var(--bg-muted)",
-          foreground: "var(--text-muted)",
-        },
-        "text-tertiary": "var(--text-tertiary)",
-        "bg-interactive": "var(--bg-interactive)",
-        accent: {
-          DEFAULT: "var(--bg-muted)",
-          foreground: "var(--text-secondary)",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "#000000",
-          foreground: "#ffffff",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "var(--bg-primary)",
-          foreground: "var(--text-primary)",
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
-        black: "#000000",
-        "near-black": "#111111",
-        "dark-gray": "#1a1a1a",
-        "medium-gray": "#666666",
-        "light-gray": "#e5e5e5",
-        "lighter-gray": "#dcdcdc",
-        "off-white": "#fafafa",
       },
       borderRadius: {
-        xs: "var(--radius-xs)",
-        sm: "var(--radius-sm)",
-        md: "var(--radius-md)",
-        lg: "var(--radius-lg)",
-        xl: "var(--radius-xl)",
-      },
-      boxShadow: {
-        xs: "var(--shadow-xs)",
-        sm: "var(--shadow-sm)",
-        md: "var(--shadow-md)",
-        lg: "var(--shadow-lg)",
-        xl: "var(--shadow-xl)",
-      },
-      spacing: {
-        18: "4.5rem",
-        88: "22rem",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
         },
       },
       animation: {
@@ -132,5 +78,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
+

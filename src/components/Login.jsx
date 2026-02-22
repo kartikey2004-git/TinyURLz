@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/Button";
+import { Label } from "./ui/label";
 import { BeatLoader } from "react-spinners";
 import Error from "./Error";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ import useFetch from "@/hooks/Use-fetch";
 import { login } from "@/db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UrlState } from "../Context";
+import { Mail, Lock } from "lucide-react";
 
 const Login = () => {
   const [errors, setErrors] = useState([]);
@@ -46,7 +47,7 @@ const Login = () => {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
       fetchUser();
     }
-  }, [data, error]);
+  }, [data, error, navigate, longLink, fetchUser]);
 
   const handleLogin = async () => {
     setErrors([]);
@@ -73,48 +74,62 @@ const Login = () => {
   };
 
   return (
-    <Card className="mt-8 lg:mt-12 w-full max-w-sm lg:max-w-md mx-auto p-6 lg:p-8 bg-background border border-border rounded-xl shadow-sm font-sans">
-      <CardHeader className="space-y-3">
-        <CardTitle className="text-xl lg:text-2xl font-semibold text-foreground break-words leading-tight">
-          Login
-        </CardTitle>
-        <CardDescription className="text-sm lg:text-base text-muted-foreground break-words leading-relaxed">
-          Login to your account if you already have one
+    <Card className="shadow-none border-border/50 bg-card">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-xl font-black font-semibold tracking-tight">Login</CardTitle>
+        <CardDescription className="text-xs">
+          Enter your credentials to access your account.
         </CardDescription>
-        {error && <Error message={error.message} />}
       </CardHeader>
 
-      <CardContent className="space-y-6">
-        {/* Email */}
-        <div className="space-y-2">
-          <Input
-            className="w-full px-4 py-3 lg:py-4 text-foreground bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-base lg:text-lg placeholder:text-muted-foreground"
-            name="email"
-            type="email"
-            placeholder="Enter Email"
-            onChange={handleInputChange}
-          />
+      <CardContent className="space-y-4">
+        {error && <Error message={error.message} />}
+        
+        <div className="space-y-1.5">
+          <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground ml-1">Email</Label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/50" />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="name@example.com"
+              className="pl-9 h-10 bg-muted/20 border-border/50 focus:border-primary/50"
+              onChange={handleInputChange}
+            />
+          </div>
           {errors.email && <Error message={errors.email} />}
         </div>
 
-        <div className="space-y-2">
-          <Input
-            className="w-full px-4 py-3 lg:py-4 text-foreground bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-base lg:text-lg placeholder:text-muted-foreground"
-            name="password"
-            type="password"
-            placeholder="Enter Password"
-            onChange={handleInputChange}
-          />
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="password" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground ml-1">Password</Label>
+            <Button variant="link" className="px-0 h-auto text-[10px] font-bold text-muted-foreground hover:text-primary">
+              Forgot?
+            </Button>
+          </div>
+          <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/50" />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              className="pl-9 h-10 bg-muted/20 border-border/50 focus:border-primary/50"
+              onChange={handleInputChange}
+            />
+          </div>
           {errors.password && <Error message={errors.password} />}
         </div>
       </CardContent>
 
-      <CardFooter className="pt-6">
+      <CardFooter className="pt-2 pb-6">
         <Button
-          className="w-full py-3 lg:py-4 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-all duration-200 shadow-sm hover:shadow-md text-base lg:text-lg"
+          className="w-full h-10 font-bold shadow-sm"
           onClick={handleLogin}
+          disabled={loading}
         >
-          {loading ? <BeatLoader size={10} color="#ffffff" /> : "Login"}
+          {loading ? <BeatLoader size={8} color="currentColor" /> : "Sign In"}
         </Button>
       </CardFooter>
     </Card>

@@ -80,6 +80,9 @@ export async function CreateUrl(
 
   if (error) {
     console.log(error.message);
+    if (error.code === "23505") {
+      throw new Error("Custom URL already exists!");
+    }
     throw new Error("Error creating short URL");
   }
   return data;

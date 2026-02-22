@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard"
 import Auth from "./pages/Auth"
 import Link from "./pages/Link"
 import RedirectLinkPage from "./pages/RedirectLinkPage"
-
+import { ThemeProvider } from "./components/theme-provider"
 import RequireAuth from "./components/Require-auth"
 import UrlProvider from "./Context"
 
@@ -43,9 +43,11 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <UrlProvider>
-      <RouterProvider router={router}/>
-    </UrlProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <UrlProvider>
+        <RouterProvider router={router}/>
+      </UrlProvider>
+    </ThemeProvider>
   )
 }
 

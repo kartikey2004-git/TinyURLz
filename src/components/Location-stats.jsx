@@ -22,7 +22,7 @@ export default function LocationStats({ stats = [] }) {
   }));
 
   return (
-    <div className="w-full max-w-3xl mx-auto text-black p-6 rounded-xl shadow-md bg-off-white border border-light-gray">
+    <div className="w-full max-w-3xl mx-auto text-black p-6 rounded bg-off-white border border-light-gray">
       <h2 className="text-xl sm:text-2xl font-thin mb-6 text-center">
         Top Locations
       </h2>

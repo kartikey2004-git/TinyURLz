@@ -9,12 +9,12 @@ import {
 } from "recharts";
 
 const COLORS = [
-  "#000000",
-  "#1a1a1a",
-  "#333333",
-  "#4d4d4d",
-  "#666666",
-  "#808080",
+  "hsl(var(--primary))",
+  "hsl(var(--primary) / 0.8)",
+  "hsl(var(--primary) / 0.6)",
+  "hsl(var(--primary) / 0.4)",
+  "hsl(var(--primary) / 0.2)",
+  "hsl(var(--muted))",
 ];
 
 export default function Device({ stats }) {
@@ -32,56 +32,50 @@ export default function Device({ stats }) {
   const hasData = result.length > 0 && stats.length > 0;
 
   return (
-    <div className="w-full max-w-xl mx-auto bg-off-white border border-light-gray p-6 rounded-xl shadow-sm text-black">
-      <h2 className="text-xl sm:text-2xl font-thin mb-6 text-center">
-        Device Usage
-      </h2>
-
+    <div className="w-full h-[300px]">
       {hasData ? (
-        <div className="w-full h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={result}
-                labelLine={false}
-                outerRadius={100}
-                label={({ device, percent }) =>
-                  `${device} (${(percent * 100).toFixed(0)}%)`
-                }
-                dataKey="count"
-                nameKey="device"
-              >
-                {result.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#ffffff",
-                  border: "1px solid #e5e5e5",
-                  borderRadius: "0.5rem",
-                  color: "#000",
-                }}
-                itemStyle={{ color: "#000" }}
-              />
-              <Legend
-                iconType="circle"
-                verticalAlign="bottom"
-                height={36}
-                formatter={(value) => (
-                  <span className="text-sm text-black">{value}</span>
-                )}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={result}
+              labelLine={false}
+              outerRadius={80}
+              dataKey="count"
+              nameKey="device"
+              stroke="none"
+            >
+              {result.map((_, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                  className="hover:opacity-80 transition-opacity"
+                />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                color: "hsl(var(--foreground))",
+              }}
+              cursor={{ fill: "transparent" }}
+            />
+            <Legend
+              iconSize={0}
+              verticalAlign="bottom"
+              height={36}
+              formatter={(value) => (
+                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{value}</span>
+              )}
+            />
+          </PieChart>
+        </ResponsiveContainer>
       ) : (
-        <p className="text-center text-medium-gray text-sm">
-          No device data available.
-        </p>
+        <div className="h-full flex items-center justify-center">
+          <p className="text-muted-foreground text-sm italic">
+            Waiting for device data...
+          </p>
+        </div>
       )}
     </div>
   );
