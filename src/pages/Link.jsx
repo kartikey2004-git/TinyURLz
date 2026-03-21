@@ -3,13 +3,27 @@ import { UrlState } from "../Context.jsx";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/Use-fetch";
-import { Download, LinkIcon, Trash, Copy, ExternalLink, Calendar, BarChart3, MapPin, Smartphone } from "lucide-react";
+import {
+  Download,
+  LinkIcon,
+  Trash,
+  Copy,
+  ExternalLink,
+  Calendar,
+  BarChart3,
+  MapPin,
+} from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader, BeatLoader } from "react-spinners";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import LocationStats from "@/components/Location-stats";
-import Device from "@/components/Device-stats";
 
 const Link = () => {
   const locationOrigin =
@@ -69,7 +83,11 @@ const Link = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
       {(loading || loadingStats) && (
         <div className="fixed top-0 left-0 right-0 z-[100]">
-          <BarLoader className="w-full" color="hsl(var(--primary))" height={2} />
+          <BarLoader
+            className="w-full"
+            color="hsl(var(--primary))"
+            height={2}
+          />
         </div>
       )}
 
@@ -81,10 +99,13 @@ const Link = () => {
           </h1>
           <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
             <Calendar className="h-4 w-4" />
-            Created {url?.created_at ? new Date(url?.created_at).toLocaleDateString() : "..."}
+            Created{" "}
+            {url?.created_at
+              ? new Date(url?.created_at).toLocaleDateString()
+              : "..."}
           </div>
         </div>
-        
+
         <div className="flex gap-2">
           <Button
             variant="outline"
@@ -95,7 +116,9 @@ const Link = () => {
             }}
             disabled={loadingDelete}
           >
-            {loadingDelete ? <BeatLoader size={4} color="currentColor" /> : (
+            {loadingDelete ? (
+              <BeatLoader size={4} color="currentColor" />
+            ) : (
               <>
                 <Trash className="h-4 w-4 mr-2" />
                 Delete Link
@@ -110,11 +133,15 @@ const Link = () => {
         <Card className="lg:col-span-2 shadow-none border-border/50">
           <CardHeader>
             <CardTitle className="text-lg font-bold">Link Details</CardTitle>
-            <CardDescription className="text-xs">Direct access and redirection information</CardDescription>
+            <CardDescription className="text-xs">
+              Direct access and redirection information
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="p-4 rounded-lg bg-muted/30 border border-border/50 space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Short URL</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                Short URL
+              </label>
               <div className="flex items-center justify-between gap-4">
                 <a
                   href={shortUrl}
@@ -136,7 +163,9 @@ const Link = () => {
             </div>
 
             <div className="p-4 rounded-lg bg-muted/30 border border-border/50 space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Destination URL</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                Destination URL
+              </label>
               <div className="flex items-center justify-between gap-4">
                 <a
                   href={url?.original_url}
@@ -150,7 +179,7 @@ const Link = () => {
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8 text-muted-foreground"
-                  onClick={() => window.open(url?.original_url, '_blank')}
+                  onClick={() => window.open(url?.original_url, "_blank")}
                 >
                   <ExternalLink className="h-4 w-4" />
                 </Button>
@@ -183,36 +212,20 @@ const Link = () => {
 
       {/* Analytics Section */}
       <div className="space-y-6">
-        <h2 className="text-xl font-bold tracking-tight">Engagement Overviews</h2>
+        <h2 className="text-xl font-bold tracking-tight">
+          Engagement Overviews
+        </h2>
 
         {stats && stats.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <Card className="lg:col-span-1 shadow-none border-border/50 bg-muted/10">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Total Clicks</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-4xl font-semibold">{stats.length}</div>
-                </CardContent>
-            </Card>
-
+          <div className="">
             <Card className="lg:col-span-3 shadow-none border-border/50">
               <CardContent className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      <MapPin className="h-3.5 w-3.5" />
-                      Locations
-                    </div>
-                    <LocationStats stats={stats} />
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <MapPin className="h-3.5 w-3.5" />
+                    Locations
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      <Smartphone className="h-3.5 w-3.5" />
-                      Devices
-                    </div>
-                    <Device stats={stats} />
-                  </div>
+                  <LocationStats stats={stats} />
                 </div>
               </CardContent>
             </Card>
@@ -223,7 +236,9 @@ const Link = () => {
               <BarChart3 className="h-8 w-8 text-muted-foreground opacity-20" />
               <div className="space-y-1">
                 <h3 className="font-bold text-base">No analytics yet</h3>
-                <p className="text-xs text-muted-foreground">Start sharing your link to capture audience data.</p>
+                <p className="text-xs text-muted-foreground">
+                  Start sharing your link to capture audience data.
+                </p>
               </div>
             </div>
           </Card>
